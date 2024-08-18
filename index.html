@@ -28,6 +28,7 @@
     <div class="video-container">
         <div id="player"></div>
     </div>
+    <script src="./lib/js-yaml/js-yaml.min.js"></script>
     <script>
         let videoIds = [];
         let recentVideos = [];
@@ -35,12 +36,11 @@
         let player;
 
         function onYouTubeIframeAPIReady() {
-            fetch('videos.txt')
+            fetch('videos.yml')
                 .then(response => response.text())
                 .then(data => {
-                    videoIds = data.split('\n')
-                        .map(line => line.split(/\s+/)[0].trim())
-                        .filter(id => id !== '');
+                    const parsedData = jsyaml.load(data);
+                    videoIds = parsedData.personal.videos.map(video => video.id);
                     console.log('Video IDs:', videoIds);
                     recentVideosLimit = videoIds.length - 2;
                     console.log('Recent Videos Limit:', recentVideosLimit);

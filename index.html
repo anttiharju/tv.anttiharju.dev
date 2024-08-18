@@ -89,7 +89,16 @@
         }
 
         function onPlayerStateChange(event) {
-            console.log('Player state change:', event.data);
+            const stateMap = {
+                '-1': 'unstarted',
+                '0': 'ended',
+                '1': 'playing',
+                '2': 'paused',
+                '3': 'buffering',
+                '5': 'video cued'
+            };
+            const state = stateMap[event.data] || 'unknown';
+            console.log(`Player state change: ${state}`);
             if (event.data === YT.PlayerState.ENDED) {
                 console.log('Video ended, loading new video.');
                 loadNextVideo();

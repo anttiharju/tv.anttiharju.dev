@@ -38,6 +38,7 @@
                     videoIds = data.split('\n')
                         .map(line => line.split(/\s+/)[0].trim())
                         .filter(id => id !== '');
+                    console.log('Video IDs:', videoIds);
                     loadRandomVideo();
                 })
                 .catch(error => console.error('Error fetching video IDs:', error));
@@ -45,6 +46,7 @@
 
         function loadRandomVideo() {
             const randomVideoId = videoIds[Math.floor(Math.random() * videoIds.length)];
+            console.log('Loading video ID:', randomVideoId);
             new YT.Player('player', {
                 height: '100%',
                 width: '100%',
@@ -54,7 +56,7 @@
                     'controls': 1,
                     'showinfo': 0,
                     'autohide': 1,
-                    'loop': 1
+                    'loop': 0 // Set loop to 0 to handle end event
                 },
                 events: {
                     'onStateChange': onPlayerStateChange
@@ -63,7 +65,9 @@
         }
 
         function onPlayerStateChange(event) {
+            console.log('Player state change:', event.data);
             if (event.data === YT.PlayerState.ENDED) {
+                console.log('Video ended, loading new video.');
                 loadRandomVideo();
             }
         }

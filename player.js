@@ -4,7 +4,7 @@ let recentVideosLimit;
 let player;
 
 function onYouTubeIframeAPIReady() {
-	fetch('videos.yml')
+	fetch('playlists.yml')
 		.then(response => response.text())
 		.then(data => {
 			const parsedData = jsyaml.load(data);

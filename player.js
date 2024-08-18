@@ -8,7 +8,9 @@ function onYouTubeIframeAPIReady() {
 		.then(response => response.text())
 		.then(data => {
 			const parsedData = jsyaml.load(data);
-			videos = parsedData.personal.videos;
+			const path = window.location.pathname.split('/').filter(Boolean);
+			const listName = path.length > 1 ? path[1] : parsedData.default;
+			videos = parsedData[listName] || parsedData[parsedData.default];
 			console.info('Videos:', videos);
 			recentVideosLimit = videos.length - 2;
 			console.info(`Will not repeat the ${recentVideosLimit} most recent videos`);

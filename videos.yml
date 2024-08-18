@@ -1,17 +1,26 @@
-name: Videos
+default: personal
 
 personal:
-  name: Personal
-  videos:
-    - id: _J5gJsvK53M
-      name: Lose My Mind ft. Mr Gabriel
-      artist: Jai Wolf
-    - id: MbiOazijZVQ
-      name: Silk
-      artist: Giselle
-    - id: 9Xvn_Ku55cI
-      name: Relax, Take It Easy
-      artist: MIKA
-    - id: 0wrsZog8qXg
-      name: Such Great Heights
-      artist: The Postal Service
+  - id: _J5gJsvK53M
+    name: Lose My Mind ft. Mr Gabriel
+    artist: Jai Wolf
+  - id: MbiOazijZVQ
+    name: Silk
+    artist: Giselle
+  - id: 9Xvn_Ku55cI
+    name: Relax, Take It Easy
+    artist: MIKA
+  - id: 0wrsZog8qXg
+    name: Such Great Heights
+    artist: The Postal Service
+
+another:
+  - id: 79fzeNUqQbQ
+    name: Like A Prayer
+    artist: Madonna
+  - id: mYX0qKkB8
+    name: Running Up That Hill
+    artist: Placebo
+  - id: xe2FPP4lX14
+    name: Dissolve
+    name: Absofacto

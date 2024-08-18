@@ -30,6 +30,8 @@
     </div>
     <script>
         let videoIds = [];
+        let shuffledVideoIds = [];
+        let currentIndex = 0;
         let player;
 
         function onYouTubeIframeAPIReady() {
@@ -40,21 +42,35 @@
                         .map(line => line.split(/\s+/)[0].trim())
                         .filter(id => id !== '');
                     console.log('Video IDs:', videoIds);
-                    loadRandomVideo();
+                    shuffleVideos();
+                    loadNextVideo();
                 })
                 .catch(error => console.error('Error fetching video IDs:', error));
         }
 
-        function loadRandomVideo() {
-            const randomVideoId = videoIds[Math.floor(Math.random() * videoIds.length)];
-            console.log('Loading video ID:', randomVideoId);
+        function shuffleVideos() {
+            shuffledVideoIds = [...videoIds];
+            for (let i = shuffledVideoIds.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledVideoIds[i], shuffledVideoIds[j]] = [shuffledVideoIds[j], shuffledVideoIds[i]];
+            }
+            currentIndex = 0;
+            console.log('Shuffled Video IDs:', shuffledVideoIds);
+        }
+
+        function loadNextVideo() {
+            if (currentIndex >= shuffledVideoIds.length) {
+                shuffleVideos();
+            }
+            const nextVideoId = shuffledVideoIds[currentIndex++];
+            console.log('Loading video ID:', nextVideoId);
             if (player) {
-                player.loadVideoById(randomVideoId);
+                player.loadVideoById(nextVideoId);
             } else {
                 player = new YT.Player('player', {
                     height: '100%',
                     width: '100%',
-                    videoId: randomVideoId,
+                    videoId: nextVideoId,
                     playerVars: {
                         'autoplay': 1,
                         'controls': 1,
@@ -73,7 +89,7 @@
             console.log('Player state change:', event.data);
             if (event.data === YT.PlayerState.ENDED) {
                 console.log('Video ended, loading new video.');
-                loadRandomVideo();
+                loadNextVideo();
             }
         }
 

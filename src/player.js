@@ -10,7 +10,7 @@ function onYouTubeIframeAPIReady() {
 			const parsedData = jsyaml.load(data);
 			const path = window.location.pathname.split('/').filter(Boolean);
 			console.debug('path:', path);
-			const listName = path.length > 1 ? path[0] : parsedData.default;
+			const listName = path.length > 0 ? path[0] : parsedData.default;
 			console.info('Playlist:', listName);
 			videos = parsedData[listName] || parsedData[parsedData.default];
 			console.info('Videos:', videos);

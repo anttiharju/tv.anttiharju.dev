@@ -30,6 +30,7 @@
     </div>
     <script>
         let videoIds = [];
+        let player;
 
         function onYouTubeIframeAPIReady() {
             fetch('videos.txt')
@@ -47,21 +48,25 @@
         function loadRandomVideo() {
             const randomVideoId = videoIds[Math.floor(Math.random() * videoIds.length)];
             console.log('Loading video ID:', randomVideoId);
-            new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                videoId: randomVideoId,
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 1,
-                    'showinfo': 0,
-                    'autohide': 1,
-                    'loop': 0 // Set loop to 0 to handle end event
-                },
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            });
+            if (player) {
+                player.loadVideoById(randomVideoId);
+            } else {
+                player = new YT.Player('player', {
+                    height: '100%',
+                    width: '100%',
+                    videoId: randomVideoId,
+                    playerVars: {
+                        'autoplay': 1,
+                        'controls': 1,
+                        'showinfo': 0,
+                        'autohide': 1,
+                        'loop': 0 // Set loop to 0 to handle end event
+                    },
+                    events: {
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
         }
 
         function onPlayerStateChange(event) {

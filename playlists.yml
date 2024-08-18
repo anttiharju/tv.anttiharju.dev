@@ -1,26 +1,137 @@
-default: personal
+default: gold
 
-personal:
-  - id: _J5gJsvK53M
-    name: Lose My Mind ft. Mr Gabriel
-    artist: Jai Wolf
-  - id: MbiOazijZVQ
-    name: Silk
-    artist: Giselle
-  - id: 9Xvn_Ku55cI
-    name: Relax, Take It Easy
-    artist: MIKA
-  - id: 0wrsZog8qXg
-    name: Such Great Heights
-    artist: The Postal Service
-
-another:
+gold:
   - id: 79fzeNUqQbQ
-    name: Like A Prayer
+    song: Like A Prayer
     artist: Madonna
   - id: d-mYX0qKkB8
-    name: Running Up That Hill
+    song: Running Up That Hill
     artist: Placebo
+  - id: 9Xvn_Ku55cI
+    song: Relax, Take It Easy
+    artist: MIKA
+  - id: 0wrsZog8qXg
+    song: Such Great Heights
+    artist: The Postal Service
+  - id: 52iW3lcpK5M
+    song: Into The Groove
+    artist: Madonna
+  - id: fe4EK4HSPkI
+    song: Kids
+    artist: MGMT
+  - id: 0J2QdDbelmY
+    song: Seven Nation Army
+    artist: The White Stripes
+  - id: Fpu5a0Bl8eY
+    song: 99 Luftballons
+    artist: NENA
+  - id: ChhCpSVrjvU
+    song: Fame
+    artist: Irene Cara
+  - id: FG1NrQYXjLU
+    song: Dancing With Myself
+    artist: Billy Idol
+  - id: aGSKrC7dGcY
+    song: Enjoy the Silence
+    artist: Depeche Mode
+  - id: bpOSxM0rNPM
+    song: Do I Wanna Know?
+    artist: Arctic Monkeys
+  - id: u1xrNaTO1bI
+    song: Personal Jesus
+    artist: Depeche Mode
+  - id: MmZexg8sxyk
+    song: Electric Feel
+    artist: MGMT
+  - id: WY2r28M1TrY
+    song: Manhattan Skyline
+    artist: a-ha
+  - id: 3T1c7GkzRQQ
+    song: Roxanne
+    artist: The Police
+  - id: 5loWhzgV9ew
+    song: Mother
+    artist: Danzig
+  - id: usNsCeOV4GM
+    song: A Day In The Life
+    artist: The Beatles
+  - id: EPOIS5taqA8
+    song: Bette Davis Eyes
+    artist: Kim Carnes
+  - id: OC5zHACynR4
+    song: Obstacle 1
+    artist: Interpol
+  - id: eAaXS_wioYg
+    song: No I in Threesome
+    artist: Interpol
+  - id: 2uOyfqVuonQ
+    song: Rest My Chemistry
+    artist: Interpol
+  - id: t4QK8RxCAwo
+    song: More Than a Feeling
+    artist: Boston
+  - id: hutlaauYa2c
+    song: Sunny
+    artist: Boney M.
+  - id: 0CGVgAYJyjk
+    song: Grace Kelly
+    artist: MIKA
+  - id: rtL5oMyBHPs
+    song: Little Dark Age
+    artist: MGMT
+  - id: dvgZkm1xWPE
+    song: Viva La Vida
+    artist: Coldplay
+  - id: PEQxEJ5_5zA
+    song: Make Your Own Kind of Music
+    artist: Mama Cass
+  - id: aGCdLKXNF3w
+    song: The Less I Know The Better
+    artist: Tame Impala
+  - id: djV11Xbc914
+    song: Take On Me
+    artist: a-ha
+  - id: lDK9QqIzhwk
+    song: Livin' On A Prayer
+    artist: Bon Jovi
+  - id: FTQbiNvZqaY
+    song: Africa
+    artist: Toto
+  - id: ZhIsAZO5gl0
+    song: I Was Made For Lovin' You
+    artist: KISS
+  - id: rVeMiVU77wo
+    song: Breezeblocks
+    artist: alt-J
+  - id: 47dtFZ8CFo8
+    song: Safe And Sound
+    artist: Capital Cities
+  - id: 5NV6Rdv1a3I
+    song: Get Lucky
+    artist: Daft Punk
+  - id: j0lSpNtjPM8
+    song: Last Resort
+    artist: Papa Roach
+  - id: 5IsSpAOD6K8
+    song: Once in a Lifetime
+    artist: Talking Heads
+  - id: wp43OdtAAkM
+    song: Running Up That Hill
+    artist: Kate Bush
+  - id: 1P17ct4e5OE
+    song: Since You've Been Gone
+    artist: Rainbow
+
+antti:
+  - id: _J5gJsvK53M
+    song: Lose My Mind ft. Mr Gabriel
+    artist: Jai Wolf
+  - id: MbiOazijZVQ
+    song: Silk
+    artist: Giselle
   - id: xe2FPP4lX14
-    name: Dissolve
+    song: Dissolve
     artist: Absofacto
+  - id: J1DAmmROUX8
+    song: Bread
+    artist: Anya Nami

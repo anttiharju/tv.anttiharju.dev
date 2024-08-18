@@ -36,7 +36,7 @@ function getRandomVideo() {
 
 function loadNextVideo() {
 	const nextVideo = getRandomVideo();
-	console.info(`Playing "${nextVideo.name}" by ${nextVideo.artist}`);
+	console.info(`Playing "${nextVideo.song}" by ${nextVideo.artist}`);
 	if (player) {
 		player.loadVideoById(nextVideo.id);
 	} else {

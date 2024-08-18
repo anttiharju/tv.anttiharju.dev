@@ -14,7 +14,7 @@ function onYouTubeIframeAPIReady() {
       console.info('Playlist:', listName);
       videos = parsedData[listName] || parsedData[parsedData.default];
       console.info('Videos:', videos);
-      recentVideosLimit = videos.length - 2;
+      recentVideosLimit = Math.floor(videos.length / 2);
       console.info(`Will not repeat the ${recentVideosLimit} most recent videos`);
       loadNextVideo();
     })

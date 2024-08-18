@@ -14,8 +14,20 @@ permissions:
   id-token: write
 
 jobs:
+  lint:
+    name: Build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Shellcheck
+        run: ./.github/scripts/shellcheck.sh
+      - name: Validate video ids
+        run: ./.github/scripts/validate-ids.sh
+
   build:
     name: Build
+    needs: lint
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -34,11 +46,11 @@ jobs:
 
   deploy:
     name: Deploy
+    needs: build
+    runs-on: ubuntu-22.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-22.04
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

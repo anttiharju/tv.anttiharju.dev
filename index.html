@@ -43,7 +43,7 @@
                     videos = parsedData.personal.videos;
                     console.log('Videos:', videos);
                     recentVideosLimit = videos.length - 2;
-                    console.log('Recent Videos Limit:', recentVideosLimit);
+                    console.log(`Will not repeat the ${recentVideosLimit} most recent videos`);
                     loadNextVideo();
                 })
                 .catch(error => console.error('Error fetching videos:', error));
@@ -66,7 +66,7 @@
 
         function loadNextVideo() {
             const nextVideo = getRandomVideo();
-            console.log(`Playing next "${nextVideo.name}" by ${nextVideo.artist}`);
+            console.log(`Playing "${nextVideo.name}" by ${nextVideo.artist}`);
             if (player) {
                 player.loadVideoById(nextVideo.id);
             } else {
@@ -100,7 +100,7 @@
             const state = stateMap[event.data] || 'unknown';
             console.log(`Player state change: ${state}`);
             if (event.data === YT.PlayerState.ENDED) {
-                console.log('Video ended, loading new video.');
+                console.log('Loading new video');
                 loadNextVideo();
             }
         }

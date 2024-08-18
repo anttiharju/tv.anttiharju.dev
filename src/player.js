@@ -10,6 +10,7 @@ function onYouTubeIframeAPIReady() {
 			const parsedData = jsyaml.load(data);
 			const path = window.location.pathname.split('/').filter(Boolean);
 			const listName = path.length > 1 ? path[1] : parsedData.default;
+			console.info('Playlist:', listName);
 			videos = parsedData[listName] || parsedData[parsedData.default];
 			console.info('Videos:', videos);
 			recentVideosLimit = videos.length - 2;

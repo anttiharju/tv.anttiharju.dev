@@ -1,6 +1,6 @@
 #!/bin/sh
 
-grep 'id:' "src/playlists.yml" | while IFS= read -r line; do
+grep 'id:' "playlists.yml" | while IFS= read -r line; do
   # Extract the id using awk
   id=$(echo "$line" | awk -F'id: ' '{print $2}')
   # Remove leading and trailing whitespace from id

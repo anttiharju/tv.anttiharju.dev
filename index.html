@@ -26,7 +26,20 @@
 </head>
 <body>
     <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/_J5gJsvK53M?autoplay=1&controls=1&showinfo=0&autohide=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe id="video-frame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
+    <script>
+        fetch('videos.txt')
+            .then(response => response.text())
+            .then(data => {
+                const videoIds = data.split('\n')
+                    .map(line => line.split('#')[0].trim())
+                    .filter(id => id !== '');
+                const randomVideoId = videoIds[Math.floor(Math.random() * videoIds.length)];
+                const iframe = document.getElementById('video-frame');
+                iframe.src = `https://www.youtube.com/embed/${randomVideoId}?autoplay=1&controls=1&showinfo=0&autohide=1&loop=1`;
+            })
+            .catch(error => console.error('Error fetching video IDs:', error));
+    </script>
 </body>
 </html>

@@ -2,8 +2,15 @@ let videos = [];
 let recentVideos = [];
 let recentVideosLimit;
 let player;
+let apiReady = false;
+let videosFetched = false;
 
 function onYouTubeIframeAPIReady() {
+	apiReady = true;
+	checkAndLoadVideos();
+}
+
+function fetchVideos() {
 	fetch('videos.yml')
 		.then(response => response.text())
 		.then(data => {
@@ -14,9 +21,16 @@ function onYouTubeIframeAPIReady() {
 			console.info('Videos:', videos);
 			recentVideosLimit = videos.length - 2;
 			console.info(`Will not repeat the ${recentVideosLimit} most recent videos`);
-			loadNextVideo();
+			videosFetched = true;
+			checkAndLoadVideos();
 		})
 		.catch(error => console.error('Error fetching videos:', error));
+}
+
+function checkAndLoadVideos() {
+	if (apiReady && videosFetched) {
+		loadNextVideo();
+	}
 }
 
 function getRandomVideo() {
@@ -80,3 +94,6 @@ var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// Fetch videos
+fetchVideos();

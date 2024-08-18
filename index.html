@@ -66,7 +66,7 @@
 
         function loadNextVideo() {
             const nextVideo = getRandomVideo();
-            console.log(`Loading ${nextVideo.name} by ${nextVideo.artist}`);
+            console.log(`Playing next "${nextVideo.name}" by ${nextVideo.artist}`);
             if (player) {
                 player.loadVideoById(nextVideo.id);
             } else {

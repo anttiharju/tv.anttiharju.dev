@@ -28,8 +28,17 @@ function getRandomVideo() {
 	const randomIndex = Math.floor(Math.random() * availableVideos.length);
 	const selectedVideo = availableVideos[randomIndex];
 	recentVideos.push(selectedVideo.id);
+
+	videos.forEach(video => {
+		if (video.song === selectedVideo.song || video.artist === selectedVideo.artist) {
+			if (!recentVideos.includes(video.id)) {
+				recentVideos.push(video.id);
+			}
+		}
+	});
+
 	if (recentVideos.length > recentVideosLimit) {
-		recentVideos.shift();
+		recentVideos = recentVideos.slice(-recentVideosLimit);
 	}
 	return selectedVideo;
 }

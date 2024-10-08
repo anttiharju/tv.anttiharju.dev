@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint but different name
+    name: Lint
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout

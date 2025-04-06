@@ -1,4 +1,4 @@
-# tv
+# tv.anttiharju.dev
 
 Personal YouTube playlists to play at parties, neverthink.tv-esque. Accessible at https://tv.anttiharju.dev
 

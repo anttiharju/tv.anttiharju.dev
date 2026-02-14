@@ -25,24 +25,44 @@ function showThumbnails() {
   const grid = document.getElementById('thumbnail-grid');
   grid.innerHTML = '';
 
-  // Calculate how many thumbnails fit on screen
-  const thumbnailWidth = 320; // minmax size from CSS
-  const thumbnailHeight = 180; // YouTube thumbnail aspect ratio
-  const cols = Math.floor(window.innerWidth / thumbnailWidth);
-  const rows = Math.ceil(window.innerHeight / thumbnailHeight);
-  const needed = cols * rows;
+  // Shuffle videos for randomization
+  const shuffledVideos = [...videos].sort(() => Math.random() - 0.5);
 
-  // Show each video at least once, repeat only if necessary
-  const displayVideos = [];
-  if (videos.length >= needed) {
-    displayVideos.push(...videos.slice(0, needed));
-  } else {
-    const repeats = Math.ceil(needed / videos.length);
-    for (let i = 0; i < repeats; i++) {
-      displayVideos.push(...videos);
-    }
-    displayVideos.splice(needed);
+  const aspectRatio = 16 / 9; // YouTube thumbnail aspect ratio
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  
+  // Calculate optimal tile size to fit all videos
+  const videoCount = videos.length;
+  let cols = Math.ceil(Math.sqrt(videoCount * screenWidth / screenHeight * (1 / aspectRatio)));
+  let thumbnailWidth = screenWidth / cols;
+  let thumbnailHeight = thumbnailWidth / aspectRatio;
+  let rows = Math.ceil(videoCount / cols);
+  
+  // Adjust if it doesn't fit vertically
+  while (thumbnailHeight * rows > screenHeight && rows > 1) {
+    cols++;
+    thumbnailWidth = screenWidth / cols;
+    thumbnailHeight = thumbnailWidth / aspectRatio;
+    rows = Math.ceil(videoCount / cols);
   }
+  
+  // Update grid template
+  grid.style.gridTemplateColumns = `repeat(${cols}, ${thumbnailWidth}px)`;
+  
+  // Calculate how many tiles fit on screen (including partial rows)
+  const visibleRows = Math.ceil(screenHeight / thumbnailHeight);
+  const needed = cols * visibleRows;
+  
+  // Fill the grid - show each video once, then repeat only to fill remaining visible space
+  const displayVideos = [...shuffledVideos];
+  
+  if (displayVideos.length < needed) {
+    const remaining = needed - displayVideos.length;
+    const shuffledForRepeat = [...videos].sort(() => Math.random() - 0.5);
+    displayVideos.push(...shuffledForRepeat.slice(0, remaining));
+  }
+
 
   displayVideos.forEach(video => {
     const item = document.createElement('div');

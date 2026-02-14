@@ -11,4 +11,4 @@ for playlist in $playlists; do
   fi
 done
 
-mv playlists.yml src/playlists.yml
+cp playlists.yml src/playlists.yml

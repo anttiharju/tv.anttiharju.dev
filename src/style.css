@@ -1,9 +1,11 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden;
   background: #000;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .thumbnail-grid {
@@ -11,16 +13,63 @@ body, html {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 0;
   padding: 0;
+  line-height: 0;
 }
 
 .thumbnail-item {
   cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.thumbnail-item:hover {
+  transform: scale(1.05);
+  z-index: 10;
 }
 
 .thumbnail-item img {
   width: 100%;
   height: auto;
   display: block;
+  vertical-align: bottom;
+}
+
+.thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.thumbnail-item:hover .thumbnail-overlay {
+  opacity: 1;
+}
+
+.overlay-song {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.overlay-artist {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.4;
 }
 
 .video-container {

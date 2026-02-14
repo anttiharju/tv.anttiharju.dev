@@ -52,7 +52,22 @@ function showThumbnails() {
     img.src = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
     img.alt = video.song && video.artist ? `${video.song} by ${video.artist}` : 'Video thumbnail';
 
+    const overlay = document.createElement('div');
+    overlay.className = 'thumbnail-overlay';
+
+    const song = document.createElement('div');
+    song.className = 'overlay-song';
+    song.textContent = video.song || 'Unknown';
+
+    const artist = document.createElement('div');
+    artist.className = 'overlay-artist';
+    artist.textContent = video.artist || 'Unknown Artist';
+
+    overlay.appendChild(song);
+    overlay.appendChild(artist);
+
     item.appendChild(img);
+    item.appendChild(overlay);
     item.addEventListener('click', () => startPlayback(video.id));
 
     grid.appendChild(item);

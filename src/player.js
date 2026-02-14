@@ -16,9 +16,72 @@ function onYouTubeIframeAPIReady() {
       console.info('Videos:', videos);
       recentVideosLimit = Math.floor(videos.length / 2);
       console.info(`Will not repeat the ${recentVideosLimit} most recent videos`);
-      loadNextVideo();
+      showThumbnails();
     })
     .catch(error => console.error('Error fetching videos:', error));
+}
+
+function showThumbnails() {
+  const grid = document.getElementById('thumbnail-grid');
+  grid.innerHTML = '';
+
+  // Calculate how many thumbnails fit on screen
+  const thumbnailWidth = 320; // minmax size from CSS
+  const thumbnailHeight = 180; // YouTube thumbnail aspect ratio
+  const cols = Math.floor(window.innerWidth / thumbnailWidth);
+  const rows = Math.ceil(window.innerHeight / thumbnailHeight);
+  const needed = cols * rows;
+
+  // Show each video at least once, repeat only if necessary
+  const displayVideos = [];
+  if (videos.length >= needed) {
+    displayVideos.push(...videos.slice(0, needed));
+  } else {
+    const repeats = Math.ceil(needed / videos.length);
+    for (let i = 0; i < repeats; i++) {
+      displayVideos.push(...videos);
+    }
+    displayVideos.splice(needed);
+  }
+
+  displayVideos.forEach(video => {
+    const item = document.createElement('div');
+    item.className = 'thumbnail-item';
+
+    const img = document.createElement('img');
+    img.src = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+    img.alt = video.song && video.artist ? `${video.song} by ${video.artist}` : 'Video thumbnail';
+
+    item.appendChild(img);
+    item.addEventListener('click', () => startPlayback(video.id));
+
+    grid.appendChild(item);
+  });
+}
+
+function startPlayback(videoId) {
+  document.getElementById('thumbnail-grid').style.display = 'none';
+  document.querySelector('.video-container').style.display = 'block';
+
+  if (player) {
+    player.loadVideoById(videoId);
+  } else {
+    player = new YT.Player('player', {
+      height: '100%',
+      width: '100%',
+      videoId: videoId,
+      playerVars: {
+        'autoplay': 1,
+        'controls': 1,
+        'showinfo': 0,
+        'autohide': 1,
+        'loop': 0
+      },
+      events: {
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
 }
 
 function getRandomVideo() {
@@ -48,25 +111,7 @@ function getRandomVideo() {
 function loadNextVideo() {
   const nextVideo = getRandomVideo();
   console.info(`Playing "${nextVideo.song}" by ${nextVideo.artist}`);
-  if (player) {
-    player.loadVideoById(nextVideo.id);
-  } else {
-    player = new YT.Player('player', {
-      height: '100%',
-      width: '100%',
-      videoId: nextVideo.id,
-      playerVars: {
-        'autoplay': 1,
-        'controls': 1,
-        'showinfo': 0,
-        'autohide': 1,
-        'loop': 0 // Set loop to 0 to handle end event
-      },
-      events: {
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
+  player.loadVideoById(nextVideo.id);
 }
 
 function onPlayerStateChange(event) {
